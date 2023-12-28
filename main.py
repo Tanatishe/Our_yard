@@ -10,7 +10,6 @@ clock = pygame.time.Clock()
 player1 = Vovka(100, 300, reverse=False)
 player2 = Denya(980, 300, reverse=True)
 
-
 now_screen = Start_screen()
 now_screen = Choose_Screen()
 

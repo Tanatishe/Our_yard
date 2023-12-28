@@ -45,7 +45,6 @@ class Fight_Screen(Screen):
 
     def process_screen(self, player1, player2, news):
 
-
         if self.timer > 0:
             text_timer = font.render(str(int(self.timer)), True, 'White', 'Black')
         else:
