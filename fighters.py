@@ -27,7 +27,6 @@ class Fighter:
         self.image_kick = [[self.k1, self.k2], [pygame.transform.flip(self.k1, 1, 0),
                                                 pygame.transform.flip(self.k2, 1, 0)]]
 
-
     def move_right(self):
 
         if self.x < 1080:
@@ -62,7 +61,7 @@ class Fighter:
             enemy.rect = pygame.Rect([(enemy.x, enemy.y, 100, 360), (enemy.x + 100, enemy.y, 100, 360)][enemy.reverse])
             if enemy.rect.collidepoint((self.x + 100) + [100, -100][self.reverse], self.y + 100):
                 enemy.hp -= 10
-                Screen.sounds[2].play()
+                sounds['effects']['ai'].play()
         if self.punch_counter > 30:
             self.image_now = self.image_punch[self.reverse][0]
         else:
@@ -76,7 +75,7 @@ class Fighter:
             enemy.rect = pygame.Rect([(enemy.x, enemy.y, 100, 360), (enemy.x + 100, enemy.y, 100, 360)][enemy.reverse])
             if enemy.rect.collidepoint((self.x + 100) + [100, -100][self.reverse], self.y + 100):
                 enemy.hp -= 20
-                Screen.sounds[3].play()
+                sounds['effects']['balls'].play()
         if self.kick_counter > 30:
             self.image_now = self.image_kick[self.reverse][0]
         else:
