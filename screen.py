@@ -1,4 +1,5 @@
 import pygame
+from sounds import sounds
 
 FPS = 60
 WIDTH = 1280
@@ -18,9 +19,6 @@ class Screen:
     screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
     FPS = FPS
-    sounds = [pygame.mixer.Sound('sounds/ha_ha_ha.mp3'), pygame.mixer.Sound('sounds/mortal_kombat_fight.mp3'),
-              pygame.mixer.Sound('sounds/komp.mp3'), pygame.mixer.Sound('sounds/balls.mp3'),
-              pygame.mixer.Sound('sounds/choise.mp3'), pygame.mixer.Sound('sounds/ortal_kombat_choose.mp3')]
 
     def __init__(self):
         self.timer = 120
@@ -34,7 +32,7 @@ class Fight_Screen(Screen):
 
     def __init__(self, player1, player2):
         super().__init__()
-        self.sounds[1].play()
+        sounds['effects']['fight'].play()
         clock1.tick(0.5)
         self.text1 = font.render(player1.name, True, 'White', 'Black')
         self.text2 = font.render(player2.name, True, 'White', 'Black')
@@ -129,7 +127,7 @@ class Choose_Screen(Screen):
     def __init__(self):
         super().__init__()
         pygame.mixer.music.play(-1)
-        self.sounds[5].play()
+        sounds['effects']['choose'].play()
         self.back = pygame.transform.scale(self.back, (self.back.get_width() * 2, self.back.get_height() * 2))
         self.text1 = font.render('CHOOSE UR HERO', True, 'White', 'Black')
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, 30))
@@ -193,14 +191,14 @@ class Choose_Screen(Screen):
                     self.process_count_pl1(n=-1)
                 elif i.key == pygame.K_RETURN:
                     player1.choose_flag = True
-                    self.sounds[4].play()
+                    sounds['effects']['choise'].play()
                 if i.key == pygame.K_RIGHT:
                     self.process_count_pl2(n=1)
                 elif i.key == pygame.K_LEFT:
                     self.process_count_pl2(n=-1)
                 elif i.key == pygame.K_KP_ENTER:
                     player2.choose_flag = True
-                    self.sounds[4].play()
+                    sounds['effects']['choise'].play()
 
             if player1.choose_flag and player2.choose_flag:
                 self.flag = 1
@@ -209,7 +207,7 @@ class Choose_Screen(Screen):
 class Start_screen(Screen):
 
     def process_start_screen(self):
-        self.sounds[0].play()
+        sounds['effects']['ha'].play()
         self.screen.blit(self.text1, self.rect_text1)
 
         pygame.display.update()
@@ -226,7 +224,7 @@ class Start_screen(Screen):
 class Loose_Screen(Screen):
 
     def process_screen(self):
-        self.sounds[0].play()
+        sounds['effects']['ha'].play()
         self.screen.blit(self.text1, self.rect_text1)
         self.screen.blit(self.text2, self.rect_text2)
 

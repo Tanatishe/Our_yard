@@ -1,5 +1,6 @@
 import pygame
 from screen import Screen
+from sounds import sounds
 
 
 class Fighter:
@@ -25,7 +26,6 @@ class Fighter:
                                                 pygame.transform.flip(self.p, 1, 0)]]
         self.image_kick = [[self.k1, self.k2], [pygame.transform.flip(self.k1, 1, 0),
                                                 pygame.transform.flip(self.k2, 1, 0)]]
-        self.sounds = (pygame.mixer.Sound('sounds/punch.mp3'), pygame.mixer.Sound('sounds/jump.mp3'))
 
     def move_right(self):
 
@@ -46,7 +46,7 @@ class Fighter:
 
     def jump(self):
         if self.jump_counter == 55:
-            self.sounds[1].play()
+            sounds['fighter']['jump'].play()
         if self.jump_counter > 0:
             self.y -= 6
         else:
@@ -57,11 +57,11 @@ class Fighter:
 
     def punch(self, enemy):
         if self.punch_counter == 30:
-            self.sounds[0].play()
+            sounds['fighter']['punch'].play()
             enemy.rect = pygame.Rect([(enemy.x, enemy.y, 100, 360), (enemy.x + 100, enemy.y, 100, 360)][enemy.reverse])
             if enemy.rect.collidepoint((self.x + 100) + [100, -100][self.reverse], self.y + 100):
                 enemy.hp -= 10
-                Screen.sounds[2].play()
+                sounds['effects']['ai'].play()
         if self.punch_counter > 30:
             self.image_now = self.image_punch[self.reverse][0]
         else:
@@ -71,11 +71,11 @@ class Fighter:
 
     def kick(self, enemy):
         if self.kick_counter == 30:
-            self.sounds[0].play()
+            sounds['fighter']['kick'].play()
             enemy.rect = pygame.Rect([(enemy.x, enemy.y, 100, 360), (enemy.x + 100, enemy.y, 100, 360)][enemy.reverse])
             if enemy.rect.collidepoint((self.x + 100) + [100, -100][self.reverse], self.y + 100):
                 enemy.hp -= 20
-                Screen.sounds[3].play()
+                sounds['effects']['balls'].play()
         if self.kick_counter > 30:
             self.image_now = self.image_kick[self.reverse][0]
         else:
