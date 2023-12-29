@@ -9,8 +9,8 @@ JUMP_LONG = 71
 
 clock1 = pygame.time.Clock()
 
-font_test = pygame.font.Font('fonts/Tana Uncial SP/TanaUncialSP.otf', 200)
-font_test1 = pygame.font.Font('fonts/Tana Uncial SP/TanaUncialSP.otf', 100)
+font_test = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 200)
+font_test1 = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 100)
 font = pygame.font.Font(size=60)
 font2 = pygame.font.Font(size=50)
 
