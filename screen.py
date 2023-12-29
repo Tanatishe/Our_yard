@@ -9,8 +9,8 @@ JUMP_LONG = 71
 
 clock1 = pygame.time.Clock()
 
-font_test = pygame.font.Font('fonts/Tana Uncial SP/TanaUncialSP.otf', 200)
-font_test1 = pygame.font.Font('fonts/Tana Uncial SP/TanaUncialSP.otf', 100)
+font_test = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 200)
+font_test1 = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 100)
 font = pygame.font.Font(size=60)
 font2 = pygame.font.Font(size=50)
 
@@ -185,20 +185,22 @@ class Choose_Screen(Screen):
 
         for i in news:
             if i.type == pygame.KEYDOWN:
-                if i.key == pygame.K_d:
-                    self.process_count_pl1(n=1)
-                elif i.key == pygame.K_a:
-                    self.process_count_pl1(n=-1)
-                elif i.key == pygame.K_RETURN:
-                    player1.choose_flag = True
-                    sounds['effects']['choise'].play()
-                if i.key == pygame.K_RIGHT:
-                    self.process_count_pl2(n=1)
-                elif i.key == pygame.K_LEFT:
-                    self.process_count_pl2(n=-1)
-                elif i.key == pygame.K_KP_ENTER:
-                    player2.choose_flag = True
-                    sounds['effects']['choise'].play()
+                if not player1.choose_flag:
+                    if i.key == pygame.K_d:
+                        self.process_count_pl1(n=1)
+                    elif i.key == pygame.K_a:
+                        self.process_count_pl1(n=-1)
+                    elif i.key == pygame.K_RETURN:
+                        player1.choose_flag = True
+                        sounds['effects']['choise'].play()
+                if not player2.choose_flag:
+                    if i.key == pygame.K_RIGHT:
+                        self.process_count_pl2(n=1)
+                    elif i.key == pygame.K_LEFT:
+                        self.process_count_pl2(n=-1)
+                    elif i.key == pygame.K_KP_ENTER:
+                        player2.choose_flag = True
+                        sounds['effects']['choise'].play()
 
             if player1.choose_flag and player2.choose_flag:
                 self.flag = 1
