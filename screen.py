@@ -1,3 +1,4 @@
+from pygame.locals import *
 import pygame
 from sounds import sounds
 
@@ -13,10 +14,12 @@ font_test = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 200)
 font_test1 = pygame.font.Font('fonts/Tana_Uncial_SP/TanaUncialSP.otf', 100)
 font = pygame.font.Font(size=60)
 font2 = pygame.font.Font(size=50)
+flags = RESIZABLE | SCALED
 
 
 class Screen:
-    screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+
+    screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
 
     FPS = FPS
 
