@@ -25,7 +25,8 @@ class Screen:
 
     def __init__(self):
         self.timer = 120
-        pygame.display.set_caption('Our yard Alpha 0.2')
+        pygame.display.set_caption('Our yard Alpha 0.3')
+        pygame.display.set_icon(pygame.image.load("images/loh.ico"))
         self.flag = 0
         pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
 
@@ -39,6 +40,8 @@ class Fight_Screen(Screen):
         clock1.tick(0.5)
         self.text1 = font.render(player1.name, True, 'White', 'Black')
         self.text2 = font.render(player2.name, True, 'White', 'Black')
+        self.text_tip1 = font2.render('wasd fg', True, 'White', 'Black')
+        self.text_tip2 = font2.render('arrows num1 num3', True, 'White', 'Black')
         self.hp_bar1 = pygame.Surface((player1.max_hp * 5, 50))
         self.hp_bar1.fill('Red')
         self.hp_bar2 = pygame.Surface((player2.max_hp * 4, 50))
@@ -47,9 +50,9 @@ class Fight_Screen(Screen):
     def process_screen(self, player1, player2, news):
 
         if self.timer > 0:
-            text_timer = font.render(str(int(self.timer)), True, 'White', 'Black')
+            text_timer = font.render(str(int(self.timer)), True, 'Gold')
         else:
-            text_timer = font.render('0', True, 'White', 'Black')
+            text_timer = font.render('0', True, 'Gold')
 
         hp_bar1_current = pygame.Surface((player1.hp * 5, 50))
         hp_bar1_current.fill('Green')
@@ -58,6 +61,8 @@ class Fight_Screen(Screen):
         self.screen.blit(self.back, (0, 0))
         self.screen.blit(self.text1, (50, 10))
         self.screen.blit(self.text2, (1050, 10))
+        self.screen.blit(self.text_tip1, (100, HEIGHT-50))
+        self.screen.blit(self.text_tip2, (900, HEIGHT-50))
         self.screen.blit(player1.image_now, (player1.x, player1.y))
         self.screen.blit(player2.image_now, (player2.x, player2.y))
         self.screen.blit(self.hp_bar1, (50, 50))
@@ -134,6 +139,8 @@ class Choose_Screen(Screen):
         self.back = pygame.transform.scale(self.back, (self.back.get_width() * 2, self.back.get_height() * 2))
         self.text1 = font.render('CHOOSE UR HERO', True, 'White', 'Black')
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, 30))
+        self.text_tip1 = font2.render('ENTER and NUM_ENTER for choise', True, 'White', 'Black')
+        self.rect_text_tip1 = self.text_tip1.get_rect(center=(WIDTH // 2, HEIGHT-50))
         self.hero1 = pygame.Surface((100, 100))
         self.hero2 = pygame.Surface((100, 100))
         self.hero3 = pygame.Surface((100, 100))
@@ -180,6 +187,7 @@ class Choose_Screen(Screen):
 
         self.screen.blit(self.back, (0, 0))
         self.screen.blit(self.text1, self.rect_text1)
+        self.screen.blit(self.text_tip1, self.rect_text_tip1)
         self.screen.blit(self.hero1, (330, 400))
         self.screen.blit(self.hero2, (560, 420))
         self.screen.blit(self.hero3, (830, 440))
@@ -232,6 +240,7 @@ class Loose_Screen(Screen):
         sounds['effects']['ha'].play()
         self.screen.blit(self.text1, self.rect_text1)
         self.screen.blit(self.text2, self.rect_text2)
+        self.screen.blit(self.text3, self.rect_text3)
 
         pygame.display.update()
         flag = False
@@ -253,5 +262,7 @@ class Loose_Screen(Screen):
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.text2 = font_test1.render(looser.name, True, 'Red', 'Black')
         self.rect_text2 = self.text2.get_rect(center=(WIDTH // 2, HEIGHT // 4))
+        self.text3 = font2.render('Press ESC to continue', True, 'White', 'Black')
+        self.rect_text3 = self.text2.get_rect(center=(WIDTH // 2, 3*(HEIGHT // 4)))
 
         self.process_screen()
