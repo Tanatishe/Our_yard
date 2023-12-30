@@ -1,6 +1,8 @@
 from pygame.locals import *
 import pygame
 from sounds import sounds
+from images import images, screen
+from random import randint as rand
 
 FPS = 60
 WIDTH = 1280
@@ -18,7 +20,7 @@ flags = RESIZABLE | SCALED
 
 
 class Screen:
-    screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
+    screen = screen
 
     FPS = FPS
 
@@ -31,9 +33,9 @@ class Screen:
 
 
 class Fight_Screen(Screen):
-    back = pygame.image.load('images/yard1.jpg').convert()
 
     def __init__(self, player1, player2):
+        self.back = images['arenas'][rand(0, len(images['arenas'])-1)]
         super().__init__()
         sounds['effects']['fight'].play()
         clock1.tick(0.5)
@@ -212,8 +214,13 @@ class Choose_Screen(Screen):
                         player2.choose_flag = True
                         sounds['effects']['choise'].play()
 
-            if player1.choose_flag and player2.choose_flag:
-                self.flag = 1
+        if self.timer < 3:
+            player1.choose_flag = True
+            player2.choose_flag = True
+            sounds['effects']['choise'].play()
+
+        if player1.choose_flag and player2.choose_flag:
+            self.flag = 1
 
 
 class Start_screen(Screen):
