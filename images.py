@@ -1,7 +1,12 @@
 import pygame
+from pygame.locals import *
 
 
-screen = pygame.display.set_mode((1280,720))
+WIDTH = 1280
+HEIGHT = 720
+flags = RESIZABLE | SCALED
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
 images = {
     'fighters': {
         'VOVKA': {
