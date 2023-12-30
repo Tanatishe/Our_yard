@@ -1,12 +1,10 @@
 from pygame.locals import *
 import pygame
 from sounds import sounds
-from images import images, screen
+from images import images, screen, WIDTH,HEIGHT
 from random import randint as rand
 
 FPS = 60
-WIDTH = 1280
-HEIGHT = 720
 PUNCH_LONG = 60
 JUMP_LONG = 71
 
