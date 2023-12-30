@@ -24,7 +24,7 @@ class Screen:
 
     def __init__(self):
         self.timer = 120
-        pygame.display.set_caption('Our yard Alpha 0.3')
+        pygame.display.set_caption('Our yard Alpha 0.4')
         pygame.display.set_icon(pygame.image.load("images/loh.ico"))
         self.flag = 0
         pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
