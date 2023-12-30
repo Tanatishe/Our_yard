@@ -61,7 +61,6 @@ while True:
             pygame.quit()
             exit(0)
 
-
     now_screen.process_screen(player1, player2, news)
 
     now_screen.timer -= 1 / FPS

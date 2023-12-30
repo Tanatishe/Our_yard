@@ -18,7 +18,6 @@ flags = RESIZABLE | SCALED
 
 
 class Screen:
-
     screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
 
     FPS = FPS
@@ -61,8 +60,8 @@ class Fight_Screen(Screen):
         self.screen.blit(self.back, (0, 0))
         self.screen.blit(self.text1, (50, 10))
         self.screen.blit(self.text2, (1050, 10))
-        self.screen.blit(self.text_tip1, (100, HEIGHT-50))
-        self.screen.blit(self.text_tip2, (900, HEIGHT-50))
+        self.screen.blit(self.text_tip1, (100, HEIGHT - 50))
+        self.screen.blit(self.text_tip2, (900, HEIGHT - 50))
         self.screen.blit(player1.image_now, (player1.x, player1.y))
         self.screen.blit(player2.image_now, (player2.x, player2.y))
         self.screen.blit(self.hp_bar1, (50, 50))
@@ -140,7 +139,7 @@ class Choose_Screen(Screen):
         self.text1 = font.render('CHOOSE UR HERO', True, 'White', 'Black')
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, 30))
         self.text_tip1 = font2.render('ENTER and NUM_ENTER for choise', True, 'White', 'Black')
-        self.rect_text_tip1 = self.text_tip1.get_rect(center=(WIDTH // 2, HEIGHT-50))
+        self.rect_text_tip1 = self.text_tip1.get_rect(center=(WIDTH // 2, HEIGHT - 50))
         self.hero1 = pygame.Surface((100, 100))
         self.hero2 = pygame.Surface((100, 100))
         self.hero3 = pygame.Surface((100, 100))
@@ -263,6 +262,6 @@ class Loose_Screen(Screen):
         self.text2 = font_test1.render(looser.name, True, 'Red', 'Black')
         self.rect_text2 = self.text2.get_rect(center=(WIDTH // 2, HEIGHT // 4))
         self.text3 = font2.render('Press ESC to continue', True, 'White', 'Black')
-        self.rect_text3 = self.text2.get_rect(center=(WIDTH // 2, 3*(HEIGHT // 4)))
+        self.rect_text3 = self.text2.get_rect(center=(WIDTH // 2, 3 * (HEIGHT // 4)))
 
         self.process_screen()
