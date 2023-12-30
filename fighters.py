@@ -21,7 +21,7 @@ class Fighter:
         self.punch_counter = 0
         self.kick_counter = 0
         self.image = (images['fighters'][self.name]['main'],
-                      pygame.transform.flip(images['fighters'][self.name]['main'],1,0))
+                      pygame.transform.flip(images['fighters'][self.name]['main'], 1, 0))
         self.image_right = ((images['fighters'][self.name]['r1'], images['fighters'][self.name]['r2']),
                             (pygame.transform.flip(images['fighters'][self.name]['r1'], 1, 0),
                              pygame.transform.flip(images['fighters'][self.name]['r2'], 1, 0)))
@@ -29,8 +29,8 @@ class Fighter:
                             (pygame.transform.flip(images['fighters'][self.name]['r1'], 1, 0),
                              pygame.transform.flip(images['fighters'][self.name]['p'], 1, 0)))
         self.image_kick = ((images['fighters'][self.name]['k1'], images['fighters'][self.name]['k2']),
-                            (pygame.transform.flip(images['fighters'][self.name]['k1'], 1, 0),
-                             pygame.transform.flip(images['fighters'][self.name]['k2'], 1, 0)))
+                           (pygame.transform.flip(images['fighters'][self.name]['k1'], 1, 0),
+                            pygame.transform.flip(images['fighters'][self.name]['k2'], 1, 0)))
         self.image_now = self.image[self.reverse]
 
     def move_right(self):
