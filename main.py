@@ -59,7 +59,8 @@ while True:
     for i in news:
         if i.type == pygame.QUIT:
             pygame.quit()
-            break
+            exit(0)
+
 
     now_screen.process_screen(player1, player2, news)
 
