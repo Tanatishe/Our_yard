@@ -42,7 +42,7 @@ class Fight_Screen(Screen):
         self.text2 = font.render(player2.name, True, 'White', 'Black')
         self.text_tip1 = font2.render('wasd fg', True, 'White', 'Black')
         self.text_tip2 = font2.render('arrows num1 num3', True, 'White', 'Black')
-        self.hp_bar1 = pygame.Surface((player1.max_hp * 5, 50))
+        self.hp_bar1 = pygame.Surface((player1.max_hp * 4, 50))
         self.hp_bar1.fill('Red')
         self.hp_bar2 = pygame.Surface((player2.max_hp * 4, 50))
         self.hp_bar2.fill('Red')
@@ -54,7 +54,7 @@ class Fight_Screen(Screen):
         else:
             text_timer = font.render('0', True, 'Gold')
 
-        hp_bar1_current = pygame.Surface((player1.hp * 5, 50))
+        hp_bar1_current = pygame.Surface((player1.hp * 4, 50))
         hp_bar1_current.fill('Green')
         hp_bar2_current = pygame.Surface((player2.hp * 4, 50))
         hp_bar2_current.fill('Green')
