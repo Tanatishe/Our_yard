@@ -1,5 +1,7 @@
 import pygame
 
+
+screen = pygame.display.set_mode((1280,720))
 images = {
     'fighters': {
         'VOVKA': {
@@ -27,5 +29,12 @@ images = {
             'k2': pygame.image.load('images/alex/alex_k2.png').convert_alpha()
         }
 
-    }
+    },
+    'arenas': [
+        pygame.image.load('images/arenas/welcome_to_milltown.jpg').convert(),
+        pygame.image.load('images/arenas/gorod_ulitsa_noch_158109_1280x720.jpg').convert(),
+        pygame.image.load('images/arenas/magiia_shar_biblioteka_63093_1280x720.jpg').convert(),
+        pygame.image.load('images/arenas/more_volny_bryzgi_1139217_1280x720.jpg').convert(),
+        pygame.image.load('images/arenas/yard1.jpg').convert(),
+    ]
 }
