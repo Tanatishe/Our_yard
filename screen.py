@@ -1,7 +1,7 @@
 from pygame.locals import *
 import pygame
 from sounds import sounds
-from images import images, screen, WIDTH,HEIGHT
+from images import images, screen, WIDTH, HEIGHT
 from random import randint as rand
 
 FPS = 60
@@ -33,7 +33,7 @@ class Screen:
 class Fight_Screen(Screen):
 
     def __init__(self, player1, player2):
-        self.back = images['arenas'][rand(0, len(images['arenas'])-1)]
+        self.back = images['arenas'][rand(0, len(images['arenas']) - 1)]
         super().__init__()
         sounds['effects']['fight'].play()
         clock1.tick(0.5)
@@ -256,7 +256,7 @@ class Loose_Screen(Screen):
                     pygame.quit()
                     break
                 if i.type == pygame.KEYDOWN:
-                    if i.key == pygame.K_ESCAPE:
+                    if i.key == pygame.K_RETURN or pygame.K_KP_ENTER:
                         flag = True
                         break
 
@@ -266,7 +266,38 @@ class Loose_Screen(Screen):
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.text2 = font_test1.render(looser.name, True, 'Red', 'Black')
         self.rect_text2 = self.text2.get_rect(center=(WIDTH // 2, HEIGHT // 4))
-        self.text3 = font2.render('Press ESC to continue', True, 'White', 'Black')
+        self.text3 = font2.render('Press ENTER to continue', True, 'White', 'Black')
         self.rect_text3 = self.text2.get_rect(center=(WIDTH // 2, 3 * (HEIGHT // 4)))
 
+        self.process_screen()
+
+
+class Menu_Screen(Screen):
+    def process_screen(self):
+        sounds['effects']['che'].play()
+        self.screen.blit(self.surf, self.surf_rect)
+
+        pygame.display.update()
+        flag = False
+        while True:
+            if flag:
+                break
+            for i in pygame.event.get():
+                if i.type == pygame.QUIT:
+                    pygame.quit()
+                    break
+                if i.type == pygame.KEYDOWN:
+                    if i.key == K_ESCAPE:
+                        flag = True
+                        break
+
+    def __init__(self, screen):
+        self.screen = screen
+        self.w = 300
+        self.h = 400
+        self.surf = pygame.Surface((self.w, self.h))
+        self.surf_rect = self.surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        self.t_menu = font2.render('MENU',True,'White')
+        self.t_menu_rect = self.t_menu.get_rect(centerx=self.w // 2)
+        self.surf.blit(self.t_menu,self.t_menu_rect)
         self.process_screen()

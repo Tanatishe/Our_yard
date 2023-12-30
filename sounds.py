@@ -7,6 +7,7 @@ sounds = {
         'kick': pygame.mixer.Sound('sounds/kick.mp3')
     },
     'effects': {
+        'che': pygame.mixer.Sound('sounds/che.mp3'),
         'ha': pygame.mixer.Sound('sounds/ha_ha_ha.mp3'),
         'fight': pygame.mixer.Sound('sounds/mortal_kombat_fight.mp3'),
         'ai': pygame.mixer.Sound('sounds/komp.mp3'),

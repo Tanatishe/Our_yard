@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 from fighters import Fighter, Vovka, Denya, Alex
-from screen import Screen, Fight_Screen, FPS, Choose_Screen, Start_screen, Loose_Screen
+from screen import Screen, Fight_Screen, FPS, Choose_Screen, Start_screen, Loose_Screen, Menu_Screen
 
 clock = pygame.time.Clock()
 
@@ -60,6 +60,10 @@ while True:
         if i.type == pygame.QUIT:
             pygame.quit()
             exit(0)
+        elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
+            menu_screen = Menu_Screen(screen = now_screen.screen)
+            menu_screen = None
+
 
     now_screen.process_screen(player1, player2, news)
 
