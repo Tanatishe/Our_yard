@@ -1,6 +1,7 @@
 import pygame
 from screen import Screen
 from sounds import sounds
+from images import images
 
 
 class Fighter:
@@ -9,7 +10,6 @@ class Fighter:
         self.x = x
         self.y = y
         self.coords = [self.x, self.y]
-        self.image_now = self.image
         self.reverse = reverse
         self.rect = pygame.Rect([(self.x, self.y, 100, 360), (self.x + 100, self.y, 100, 360)][self.reverse])
         self.hitbox = pygame.Surface((100, 360))
@@ -20,12 +20,18 @@ class Fighter:
         self.jump_counter = 0
         self.punch_counter = 0
         self.kick_counter = 0
-        self.image_right = [[self.r1, self.r2], [pygame.transform.flip(self.r1, 1, 0),
-                                                 pygame.transform.flip(self.r2, 1, 0)]]
-        self.image_punch = [[self.r1, self.p], [pygame.transform.flip(self.r1, 1, 0),
-                                                pygame.transform.flip(self.p, 1, 0)]]
-        self.image_kick = [[self.k1, self.k2], [pygame.transform.flip(self.k1, 1, 0),
-                                                pygame.transform.flip(self.k2, 1, 0)]]
+        self.image = (images['fighters'][self.name]['main'],
+                      pygame.transform.flip(images['fighters'][self.name]['main'],1,0))
+        self.image_right = ((images['fighters'][self.name]['r1'], images['fighters'][self.name]['r2']),
+                            (pygame.transform.flip(images['fighters'][self.name]['r1'], 1, 0),
+                             pygame.transform.flip(images['fighters'][self.name]['r2'], 1, 0)))
+        self.image_punch = ((images['fighters'][self.name]['r1'], images['fighters'][self.name]['p']),
+                            (pygame.transform.flip(images['fighters'][self.name]['r1'], 1, 0),
+                             pygame.transform.flip(images['fighters'][self.name]['p'], 1, 0)))
+        self.image_kick = ((images['fighters'][self.name]['k1'], images['fighters'][self.name]['k2']),
+                            (pygame.transform.flip(images['fighters'][self.name]['k1'], 1, 0),
+                             pygame.transform.flip(images['fighters'][self.name]['k2'], 1, 0)))
+        self.image_now = self.image[self.reverse]
 
     def move_right(self):
 
@@ -87,13 +93,7 @@ class Fighter:
 class Vovka(Fighter):
     def __init__(self, x, y, reverse):
         self.max_hp = 80
-        self.name = 'ВОВАН'
-        self.image = pygame.image.load('images/vovka/vovan.png').convert_alpha()
-        self.r1 = pygame.image.load('images/vovka/vovan_r1.png').convert_alpha()
-        self.r2 = pygame.image.load('images/vovka/vovan_r2.png').convert_alpha()
-        self.p = pygame.image.load('images/vovka/vovan_r_punch.png').convert_alpha()
-        self.k1 = pygame.image.load('images/vovka/vovan_k1.png').convert_alpha()
-        self.k2 = pygame.image.load('images/vovka/vovan_k2.png').convert_alpha()
+        self.name = 'VOVKA'
         self.speed = 5
         super().__init__(x, y, reverse)
 
@@ -101,13 +101,7 @@ class Vovka(Fighter):
 class Denya(Fighter):
     def __init__(self, x, y, reverse):
         self.max_hp = 120
-        self.name = 'ДЕНЯ'
-        self.image = pygame.image.load('images/denya/denya.png').convert_alpha()
-        self.r1 = pygame.image.load('images/denya/denya_r1.png').convert_alpha()
-        self.r2 = pygame.image.load('images/denya/denya_r2.png').convert_alpha()
-        self.p = pygame.image.load('images/denya/denya_r_punch.png').convert_alpha()
-        self.k1 = pygame.image.load('images/denya/denya_k1.png').convert_alpha()
-        self.k2 = pygame.image.load('images/denya/denya_k2.png').convert_alpha()
+        self.name = 'DENYA'
         self.speed = 3
         super().__init__(x, y, reverse)
 
@@ -115,12 +109,6 @@ class Denya(Fighter):
 class Alex(Fighter):
     def __init__(self, x, y, reverse):
         self.max_hp = 90
-        self.name = 'ЛЁХА'
-        self.image = pygame.image.load('images/alex/alex.png').convert_alpha()
-        self.r1 = pygame.image.load('images/alex/alex_r1.png').convert_alpha()
-        self.r2 = pygame.image.load('images/alex/alex_r2.png').convert_alpha()
-        self.p = pygame.image.load('images/alex/alex_p.png').convert_alpha()
-        self.k1 = pygame.image.load('images/alex/alex_k1.png').convert_alpha()
-        self.k2 = pygame.image.load('images/alex/alex_k2.png').convert_alpha()
+        self.name = 'ALEX'
         self.speed = 4
         super().__init__(x, y, reverse)

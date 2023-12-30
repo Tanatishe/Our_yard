@@ -85,10 +85,10 @@ class Fight_Screen(Screen):
             player2.move_right()
         player1.back_counter -= 1
         if player1.back_counter < 1:
-            player1.image_now = player1.image
+            player1.image_now = player1.image[player1.reverse]
         player2.back_counter -= 1
         if player2.back_counter < 1:
-            player2.image_now = player2.image
+            player2.image_now = player2.image[player2.reverse]
 
         # jump
         if player1.jump_counter == 0 and (key[pygame.K_SPACE] or key[pygame.K_w]):
