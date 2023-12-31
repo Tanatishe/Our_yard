@@ -27,7 +27,7 @@ class Screen:
         pygame.display.set_caption('Our yard Alpha 0.4')
         pygame.display.set_icon(pygame.image.load("images/loh.ico"))
         self.flag = 0
-        pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
+
 
 
 class Fight_Screen(Screen):
@@ -36,6 +36,8 @@ class Fight_Screen(Screen):
         self.back = images['arenas'][rand(0, len(images['arenas']) - 1)]
         super().__init__()
         sounds['effects']['fight'].play()
+        pygame.mixer.music.load('sounds/show_falls_Lisa.mp3')
+        pygame.mixer.music.play(-1)
         clock1.tick(0.5)
         self.text1 = font.render(player1.name, True, 'White', 'Black')
         self.text2 = font.render(player2.name, True, 'White', 'Black')
@@ -133,6 +135,7 @@ class Choose_Screen(Screen):
 
     def __init__(self):
         super().__init__()
+        pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
         pygame.mixer.music.play(-1)
         sounds['effects']['choose'].play()
         self.back = pygame.transform.scale(self.back, (self.back.get_width() * 2, self.back.get_height() * 2))
@@ -273,13 +276,25 @@ class Loose_Screen(Screen):
 
 
 class Menu_Screen(Screen):
+
+    def process_count_frame(self, n):
+        self.frame_rect_count += n
+        if self.frame_rect_count < 0:
+            self.frame_rect_count = 2
+        elif self.frame_rect_count > 2:
+            self.frame_rect_count = 0
+
     def process_screen(self):
         sounds['effects']['che'].play()
-        self.screen.blit(self.surf, self.surf_rect)
 
-        pygame.display.update()
         flag = False
         while True:
+            self.frame_rect = (self.t_option1_rect, self.t_option2_rect, self.t_option3_rect)[self.frame_rect_count]
+            self.surf.blit(self.frame, self.frame_rect)
+            self.screen.blit(self.surf, self.surf_rect)
+
+            pygame.display.update(self.surf)
+
             if flag:
                 break
             for i in pygame.event.get():
@@ -290,6 +305,11 @@ class Menu_Screen(Screen):
                     if i.key == K_ESCAPE:
                         flag = True
                         break
+                    elif i.key == K_RIGHT or i.key == K_DOWN:
+                        self.process_count_frame(1)
+
+                    elif i.key == K_LEFT or i.key == K_UP:
+                        self.process_count_frame(-1)
 
     def __init__(self, screen):
         self.screen = screen
@@ -297,7 +317,20 @@ class Menu_Screen(Screen):
         self.h = 400
         self.surf = pygame.Surface((self.w, self.h))
         self.surf_rect = self.surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-        self.t_menu = font2.render('MENU',True,'White')
+        self.t_menu = font2.render('MENU', True, 'White')
         self.t_menu_rect = self.t_menu.get_rect(centerx=self.w // 2)
-        self.surf.blit(self.t_menu,self.t_menu_rect)
+        self.t_option1 = font2.render('option1', True, 'White')
+        self.t_option1_rect = pygame.Rect(0,0,0,0)
+        self.t_option2 = font2.render('option2', True, 'White')
+        self.t_option2_rect = self.t_option2.get_rect(center=(self.w // 2, 200))
+        self.t_option3 = font2.render('option3', True, 'White')
+        self.t_option3_rect = self.t_option3.get_rect(center=(self.w // 2, 300))
+        self.frame = pygame.Surface((300, 50))
+        pygame.draw.rect(self.frame, 'Gold', (0, 0, 300, 50))
+        self.frame.set_alpha(28)
+        self.frame_rect_count = 0
+        self.surf.blit(self.t_menu, self.t_menu_rect)
+        self.surf.blit(self.t_option1, self.t_option1_rect)
+        self.surf.blit(self.t_option2, self.t_option2_rect)
+        self.surf.blit(self.t_option3, self.t_option3_rect)
         self.process_screen()
