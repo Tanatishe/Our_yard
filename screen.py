@@ -29,7 +29,6 @@ class Screen:
         self.flag = 0
 
 
-
 class Fight_Screen(Screen):
 
     def __init__(self, player1, player2):
@@ -289,8 +288,13 @@ class Menu_Screen(Screen):
 
         flag = False
         while True:
-            self.frame_rect = (self.t_option1_rect, self.t_option2_rect, self.t_option3_rect)[self.frame_rect_count]
-            self.surf.blit(self.frame, self.frame_rect)
+            self.t_option1 = font2.render('option1', True, self.colors[self.frame_rect_count == 0])
+            self.t_option2 = font2.render('option2', True, self.colors[self.frame_rect_count == 1])
+            self.t_option3 = font2.render('option3', True, self.colors[self.frame_rect_count == 2])
+            self.surf.blit(self.t_option1, self.t_option1_rect)
+            self.surf.blit(self.t_option2, self.t_option2_rect)
+            self.surf.blit(self.t_option3, self.t_option3_rect)
+
             self.screen.blit(self.surf, self.surf_rect)
 
             pygame.display.update(self.surf)
@@ -319,15 +323,13 @@ class Menu_Screen(Screen):
         self.surf_rect = self.surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.t_menu = font2.render('MENU', True, 'White')
         self.t_menu_rect = self.t_menu.get_rect(centerx=self.w // 2)
+        self.colors = ('White', 'Gold')
         self.t_option1 = font2.render('option1', True, 'White')
-        self.t_option1_rect = pygame.Rect(0,0,0,0)
+        self.t_option1_rect = self.t_option1.get_rect(center=(self.w // 2, 100))
         self.t_option2 = font2.render('option2', True, 'White')
         self.t_option2_rect = self.t_option2.get_rect(center=(self.w // 2, 200))
         self.t_option3 = font2.render('option3', True, 'White')
         self.t_option3_rect = self.t_option3.get_rect(center=(self.w // 2, 300))
-        self.frame = pygame.Surface((300, 50))
-        pygame.draw.rect(self.frame, 'Gold', (0, 0, 300, 50))
-        self.frame.set_alpha(28)
         self.frame_rect_count = 0
         self.surf.blit(self.t_menu, self.t_menu_rect)
         self.surf.blit(self.t_option1, self.t_option1_rect)
