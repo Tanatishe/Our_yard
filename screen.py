@@ -1,7 +1,7 @@
 from pygame.locals import *
 import pygame
 from sounds import sounds
-from images import images, screen, WIDTH,HEIGHT
+from images import images, screen, WIDTH, HEIGHT
 from random import randint as rand
 
 FPS = 60
@@ -27,15 +27,16 @@ class Screen:
         pygame.display.set_caption('Our yard Alpha 0.4')
         pygame.display.set_icon(pygame.image.load("images/loh.ico"))
         self.flag = 0
-        pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
 
 
 class Fight_Screen(Screen):
 
     def __init__(self, player1, player2):
-        self.back = images['arenas'][rand(0, len(images['arenas'])-1)]
+        self.back = images['arenas'][rand(0, len(images['arenas']) - 1)]
         super().__init__()
         sounds['effects']['fight'].play()
+        pygame.mixer.music.load('sounds/show_falls_Lisa.mp3')
+        pygame.mixer.music.play(-1)
         clock1.tick(0.5)
         self.text1 = font.render(player1.name, True, 'White', 'Black')
         self.text2 = font.render(player2.name, True, 'White', 'Black')
@@ -133,6 +134,7 @@ class Choose_Screen(Screen):
 
     def __init__(self):
         super().__init__()
+        pygame.mixer.music.load('sounds/zaglavnaja-tema-mortal-kombat-8-bit.mp3')
         pygame.mixer.music.play(-1)
         sounds['effects']['choose'].play()
         self.back = pygame.transform.scale(self.back, (self.back.get_width() * 2, self.back.get_height() * 2))
@@ -256,7 +258,7 @@ class Loose_Screen(Screen):
                     pygame.quit()
                     break
                 if i.type == pygame.KEYDOWN:
-                    if i.key == pygame.K_ESCAPE:
+                    if i.key == pygame.K_RETURN or pygame.K_KP_ENTER:
                         flag = True
                         break
 
@@ -266,7 +268,71 @@ class Loose_Screen(Screen):
         self.rect_text1 = self.text1.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.text2 = font_test1.render(looser.name, True, 'Red', 'Black')
         self.rect_text2 = self.text2.get_rect(center=(WIDTH // 2, HEIGHT // 4))
-        self.text3 = font2.render('Press ESC to continue', True, 'White', 'Black')
+        self.text3 = font2.render('Press ENTER to continue', True, 'White', 'Black')
         self.rect_text3 = self.text2.get_rect(center=(WIDTH // 2, 3 * (HEIGHT // 4)))
 
+        self.process_screen()
+
+
+class Menu_Screen(Screen):
+
+    def process_count_frame(self, n):
+        self.frame_rect_count += n
+        if self.frame_rect_count < 0:
+            self.frame_rect_count = 2
+        elif self.frame_rect_count > 2:
+            self.frame_rect_count = 0
+
+    def process_screen(self):
+        sounds['effects']['che'].play()
+
+        flag = False
+        while True:
+            self.t_option1 = font2.render('option1', True, self.colors[self.frame_rect_count == 0])
+            self.t_option2 = font2.render('option2', True, self.colors[self.frame_rect_count == 1])
+            self.t_option3 = font2.render('option3', True, self.colors[self.frame_rect_count == 2])
+            self.surf.blit(self.t_option1, self.t_option1_rect)
+            self.surf.blit(self.t_option2, self.t_option2_rect)
+            self.surf.blit(self.t_option3, self.t_option3_rect)
+
+            self.screen.blit(self.surf, self.surf_rect)
+
+            pygame.display.update(self.surf)
+
+            if flag:
+                break
+            for i in pygame.event.get():
+                if i.type == pygame.QUIT:
+                    pygame.quit()
+                    break
+                if i.type == pygame.KEYDOWN:
+                    if i.key == K_ESCAPE:
+                        flag = True
+                        break
+                    elif i.key == K_RIGHT or i.key == K_DOWN:
+                        self.process_count_frame(1)
+
+                    elif i.key == K_LEFT or i.key == K_UP:
+                        self.process_count_frame(-1)
+
+    def __init__(self, screen):
+        self.screen = screen
+        self.w = 300
+        self.h = 400
+        self.surf = pygame.Surface((self.w, self.h))
+        self.surf_rect = self.surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        self.t_menu = font2.render('MENU', True, 'White')
+        self.t_menu_rect = self.t_menu.get_rect(centerx=self.w // 2)
+        self.colors = ('White', 'Gold')
+        self.t_option1 = font2.render('option1', True, 'White')
+        self.t_option1_rect = self.t_option1.get_rect(center=(self.w // 2, 100))
+        self.t_option2 = font2.render('option2', True, 'White')
+        self.t_option2_rect = self.t_option2.get_rect(center=(self.w // 2, 200))
+        self.t_option3 = font2.render('option3', True, 'White')
+        self.t_option3_rect = self.t_option3.get_rect(center=(self.w // 2, 300))
+        self.frame_rect_count = 0
+        self.surf.blit(self.t_menu, self.t_menu_rect)
+        self.surf.blit(self.t_option1, self.t_option1_rect)
+        self.surf.blit(self.t_option2, self.t_option2_rect)
+        self.surf.blit(self.t_option3, self.t_option3_rect)
         self.process_screen()
