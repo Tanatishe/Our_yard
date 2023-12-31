@@ -309,10 +309,10 @@ class Menu_Screen(Screen):
                     if i.key == K_ESCAPE:
                         flag = True
                         break
-                    elif i.key == K_RIGHT or i.key == K_DOWN:
+                    elif i.key in [K_RIGHT, K_DOWN, K_s, K_d]:
                         self.process_count_frame(1)
 
-                    elif i.key == K_LEFT or i.key == K_UP:
+                    elif i.key in [K_LEFT, K_UP, K_w, K_a]:
                         self.process_count_frame(-1)
 
     def __init__(self, screen):
