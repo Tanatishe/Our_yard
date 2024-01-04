@@ -258,7 +258,7 @@ class Loose_Screen(Screen):
                     pygame.quit()
                     break
                 if i.type == pygame.KEYDOWN:
-                    if i.key == pygame.K_RETURN or pygame.K_KP_ENTER:
+                    if i.key == pygame.K_RETURN or i.key == pygame.K_KP_ENTER:
                         flag = True
                         break
 
